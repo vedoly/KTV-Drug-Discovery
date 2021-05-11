@@ -9,6 +9,7 @@ lerna-debug.log*
 backend/build/
 frontend/dist/
 backend/Model
+backend/tmp
 frontend/node_modules
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
