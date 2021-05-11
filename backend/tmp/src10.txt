@@ -1,0 +1,10 @@
+<RX_1> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_2> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_3> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_4> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_5> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_6> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_7> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_8> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_9> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
+<RX_10> O = [ N + ] ( [ O - ] ) [ C @ @ H ] 1 C C = C ( C B r ) C C [ C @ @ H ] 1 c 1 c c c ( C l ) c c 1 C l
