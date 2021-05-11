@@ -28,3 +28,17 @@ export const fetchRetrosynthesis = (state, setState) => {
       console.log(error);
     });
 };
+
+export const fetchPathWay = (state, setState) => {
+  axios
+    .post("http://127.0.0.1:5000/getPathWay", {
+      log: state.logChem,
+    })
+    .then((response) => {
+      console.log("velody");
+    })
+
+    .catch((error) => {
+      console.log(error);
+    });
+};

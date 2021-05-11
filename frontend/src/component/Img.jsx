@@ -18,7 +18,8 @@ export const Img = (props) => {
     // });
 
     let newLogChem = state.logChem;
-    newLogChem.push(result);
+    newLogChem.push(result + ">>" + state.chem);
+
     setState({
       ...state,
       logChem: newLogChem,

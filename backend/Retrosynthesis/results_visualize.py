@@ -68,6 +68,7 @@ def draw_reaction(path):
       except: pass
       
     reaction = tgt+'>>'+src
+    print(reaction,"xxxx")
     try:rxns.append((reaction_class, AllChem.ReactionFromSmarts(reaction, useSmiles=True),product))
     except: print('invalid smiles '+src)
   print(rxns)
@@ -100,3 +101,16 @@ def draw_heat_map(path):
     plt.xticks(rotation=0) 
     plt.savefig(f'{tmp_path}/heatmap_tmp{t}.png')
     # plt.show()
+
+def draw_reaction2(reactions):
+  for i,reaction in enumerate(reactions):
+    rxn = AllChem.ReactionFromSmarts(reaction, useSmiles=True)
+    drawer = rdMolDraw2D.MolDraw2DCairo(1000, 300)
+    drawer.DrawReaction(rxn)
+    drawer.FinishDrawing()
+    drawer.WriteDrawingText('path/'+str(i)+'.png')
+    img = Image.open('path/'+str(i)+'.png')
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("arial.ttf", 20)
+    draw.text((10, 0), "", (0,0,0), font=font)
+    img.save('path/'+str(i)+'.png')

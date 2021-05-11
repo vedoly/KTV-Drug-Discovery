@@ -4,7 +4,8 @@ import os
 import glob
 import Retrosynthesis.results_visualize as rv
 from flask_cors import CORS, cross_origin
-
+import shutil
+import cv2 as cv
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -85,6 +86,31 @@ def get_image(image_name):
 #     except FileNotFoundError:
 #         abort(404)
 
+@app.route("/getPathWay",methods=['POST'])
+@cross_origin()
+def getPathWay():
+    try:
+        shutil.rmtree('path')
+        os.remove('velody.png')
+    except:
+        pass
+    try:
+        os.mkdir('path')
+    except:
+        pass
+
+
+ 
+
+    log = request.json['log']
+    rv.draw_reaction2(log)
+    
+    img1 = cv.imread('path/'+os.listdir('path')[0])
+    for filename in os.listdir('path')[1:]:
+        img2 = cv.imread('path/'+filename)
+        img1 = cv.vconcat([img1, img2])
+    cv.imwrite('tmp/velody.png', img1)
+    return {'log':log}
 
 
 @app.after_request

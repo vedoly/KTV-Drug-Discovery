@@ -7,9 +7,15 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { TextInput } from "../component/TextInput";
 import { ImgList } from "../component/ImgList";
-import { fetchRetrosynthesis } from "../api/api";
+import { fetchPathWay, fetchRetrosynthesis } from "../api/api";
 import { CurrentList } from "../component/CurrentList";
 import { Row, Col, Button } from "antd";
+
+function delay(URL) {
+  setTimeout(function () {
+    window.location = URL;
+  }, 500);
+}
 
 export const RetroSynthesis = () => {
   const search =
@@ -40,12 +46,21 @@ export const RetroSynthesis = () => {
           offset={1}
           className="shadow-lg p-3 mb-5 bg-light rounded"
         >
-          <div>
-            <h4 className="pl-3">Log</h4>
-            {state.logChem.map((chem) => (
-              <li>{chem}</li>
-            ))}
-          </div>
+          <a href="javascript:setTimeout(()=>{window.location = 'http://localhost:5000/get-image/velody.png' },3000);">
+            <div
+              onClick={(e) => {
+                fetchPathWay(state, setState);
+              }}
+            >
+              <Row>
+                <h4 className="pl-3">Log</h4>
+              </Row>
+
+              {state.logChem.map((chem) => (
+                <li>{chem}</li>
+              ))}
+            </div>
+          </a>
         </Col>
       </Row>
 
