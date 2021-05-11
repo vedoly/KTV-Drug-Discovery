@@ -110,3 +110,5 @@ dist
 
 # Model
 .Model/
+
+**/__pycache__
