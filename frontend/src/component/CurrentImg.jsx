@@ -8,21 +8,7 @@ export const CurrentImg = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const handleOk = () => {
     setIsModalVisible(false);
-    // console.log(result);
-
-    // let newCurrentChem = state.currentChem;
-    // newCurrentChem = newCurrentChem.concat(result.split("."));
-
-    // let newLogChem = state.logChem;
-    // newLogChem.push(result + ">>" + state.chem);
-
-    // setState({
-    //   ...state,
-    //   logChem: newLogChem,
-    //   chem: result,
-    //   currentChem: newCurrentChem,
-    //   pageStage: "Choosing",
-    // });
+    fetchRetrosynthesis(state, setState);
   };
 
   const state = props.state;
@@ -34,7 +20,7 @@ export const CurrentImg = (props) => {
     .replace("#", "$");
 
   const handleClick = () => {
-    // setIsModalVisible(true);
+    setIsModalVisible(true);
     console.log("xxxxx");
     setState({ ...state, chem: props.chem });
     // fetchRetrosynthesis(state, setState);
@@ -57,14 +43,25 @@ export const CurrentImg = (props) => {
           style={{ background: "transparent" }}
           onClick={handleClick}
         ></img>
+
         <Modal
-          title={`RX_`}
+          title={`${newChem}`}
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={() => {
             setIsModalVisible(false);
           }}
-        ></Modal>
+          okText="Predict"
+          cancelText="Cancel"
+        >
+          <img
+            src={`http://localhost:5000/get-image/${newChem}.png`}
+            width={"30%"}
+            height={"30%"}
+            className="shadow rounded"
+            style={{ background: "transparent" }}
+          ></img>
+        </Modal>
       </div>
     </div>
   );

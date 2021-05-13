@@ -76,11 +76,11 @@ export const Img = (props) => {
           height={"40%"}
         ></img>
         <a
-          href={`http://localhost:5000/get-image/heatmap_tmp${number}.png`}
+          href={`http://localhost:5000/get-image/heatmap_tmp${number - 1}.png`}
           target="popup"
         >
           <img
-            src={`http://localhost:5000/get-image/heatmap_tmp${number}.png`}
+            src={`http://localhost:5000/get-image/heatmap_tmp${number - 1}.png`}
             width={"100%"}
             height={500}
           ></img>
