@@ -19,6 +19,7 @@ export const fetchRetrosynthesis = (state, setState) => {
         ...state,
         currentChem: currentChemx,
         resultChem: response.data.result,
+        pageStage: "Suggestion",
       });
 
       console.log(state.resultChem);

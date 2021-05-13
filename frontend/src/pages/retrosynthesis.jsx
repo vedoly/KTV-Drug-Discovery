@@ -25,12 +25,13 @@ export const RetroSynthesis = () => {
     currentChem: [search],
     resultChem: "Loading",
     logChem: [],
+    pageStage: "Init",
   });
 
   return (
     <div>
       <Title></Title>
-
+      <div>{state.pageStage}</div>
       <Row>
         <Col span={15} offset={1}>
           <div

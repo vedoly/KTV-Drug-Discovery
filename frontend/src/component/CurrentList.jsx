@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col } from "antd";
 
 export const CurrentList = ({ state, setState }) => {
-  return (
+  return state.pageStage !== "Init" ? (
     <div>
       <h4 className="pl-4">Chem</h4>
 
@@ -19,5 +19,7 @@ export const CurrentList = ({ state, setState }) => {
         ))}
       </Row>
     </div>
+  ) : (
+    <div></div>
   );
 };
