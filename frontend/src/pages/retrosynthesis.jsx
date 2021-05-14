@@ -32,66 +32,45 @@ export const RetroSynthesis = () => {
     <div>
       <Title></Title>
       <div>{state.pageStage}</div>
-      <Row>
-        <Col span={15} offset={1}>
+      <div className="container p-4 rounded" style={{backgroundColor: "#f8f9fa"}}>
+        <Row className="">
           <div
-            className="shadow-lg p-3 mb-5 rounded"
-            style={{ background: "#ebffff" }}
+            className="container p-3 rounded"
+            style={{ background: "white" }}
           >
+            <h4>Something</h4>
             <CurrentList {...{ state, setState }}></CurrentList>
           </div>
-        </Col>
+        </Row>
 
-        <Col
-          span={6}
-          offset={1}
-          className="shadow-lg p-3 mb-5 bg-light rounded"
-        >
-          <a href="javascript:setTimeout(()=>{window.location = 'http://localhost:5000/get-image/velody.png' },3000);">
-            <div
+        <Row className="mt-3">
+          <Col
+            span={10}
+            className="shadow-lg rounded"
+            style={{ background: "#DCDBFF", padding: "8px 0" }}
+          >
+            <h5 className="pt-3 pl-3">Chem : {state.chem}</h5>
+          </Col>
+          <Col span={6} className="pt-3" offset={6}>
+            {" "}
+            <Button
+              type="primary"
+              className="pt-1"
               onClick={(e) => {
-                fetchPathWay(state, setState);
+                fetchRetrosynthesis(state, setState);
               }}
             >
-              <Row>
-                <h4 className="pl-3">Log</h4>
-              </Row>
+              Predict
+            </Button>
+          </Col>
+        </Row>
 
-              {state.logChem.map((chem) => (
-                <li>{chem}</li>
-              ))}
-            </div>
-          </a>
-        </Col>
-      </Row>
+        <TextInput chem={state.chem}></TextInput>
 
-      <Row className="">
-        <Col
-          span={10}
-          className="shadow-lg rounded ml-4"
-          style={{ background: "#DCDBFF", padding: "8px 0" }}
-        >
-          <h5 className="pt-3 pl-3">Chem : {state.chem}</h5>
-        </Col>
-        <Col span={6} className="pt-3" offset={6}>
-          {" "}
-          <Button
-            type="primary"
-            className="pt-1"
-            onClick={(e) => {
-              fetchRetrosynthesis(state, setState);
-            }}
-          >
-            Predict
-          </Button>
-        </Col>
-      </Row>
-
-      <TextInput chem={state.chem}></TextInput>
-
-      <div className="pl-3 pt-4">
-        <ImgList className="pr-1" {...{ state, setState }}></ImgList>
-      </div>
+        <div className="pt-4">
+          <ImgList className="pr-1" {...{ state, setState }}></ImgList>
+        </div>
+        </div>
     </div>
   );
 };
