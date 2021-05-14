@@ -112,4 +112,7 @@ dist
 # Model
 .Model/
 
+# Generative Pickle
+**/backend/Generative/CGVAE/pkl
+**/backend/Generative/CGVAE/data
 **/__pycache__
