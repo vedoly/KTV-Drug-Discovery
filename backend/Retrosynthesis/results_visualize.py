@@ -114,3 +114,15 @@ def draw_reaction2(reactions):
     font = ImageFont.truetype("arial.ttf", 20)
     draw.text((10, 0), "", (0,0,0), font=font)
     img.save('path/'+str(i)+'.png')
+
+def draw_chems(chems):
+  for i,c in enumerate(chems):
+    print(c)
+    try: 
+      pic = Draw.MolToImage(Chem.MolFromSmiles(c))
+      c = c.replace("/",'v')
+      c = c.replace(chr(92),'w')
+    
+      pic.save("tmp/"+str(c)+".png",transparent=True)
+      print("xxxx")
+    except: pass

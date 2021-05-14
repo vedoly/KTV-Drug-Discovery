@@ -76,15 +76,13 @@ def get_image(image_name):
     except FileNotFoundError:
         abort(404)
 
-# @app.route("/get-image2/<image_name>")
-# def get_image2(image_name):
+@app.route('/processImage',methods=['POST'])
+def processImage():
+    chems = request.json['chems']
+    rv.draw_chems(chems)
+    return {'reuslt':"velody"}
     
-#     app.config["CLIENT_IMAGES"] = 'tmp2/'
-#     print(image_name)
-#     try:
-#         return send_from_directory(app.config["CLIENT_IMAGES"], filename=image_name)
-#     except FileNotFoundError:
-#         abort(404)
+ 
 
 @app.route("/getPathWay",methods=['POST'])
 @cross_origin()

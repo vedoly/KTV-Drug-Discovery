@@ -26,7 +26,7 @@ def generate():
     generated_smiles_with_qed = []
     if path=='CGVAE':        
         # choice 1 : pickle
-        with open(f'.\Generative\{path}\pkl\generated_smiles_with_qed.pkl', "rb") as generated_smiles_with_qed_file:
+        with open(f'./Generative/{path}/pkl/generated_smiles_with_qed.pkl', "rb") as generated_smiles_with_qed_file:
             generated_smiles_with_qed = pickle.load(generated_smiles_with_qed_file)
 
         # choice 2 : actual run
@@ -54,4 +54,4 @@ def add_header(response):
 
 # @app.route('/retrosynthesis',methoed='')
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5555)
