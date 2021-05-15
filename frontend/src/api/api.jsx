@@ -32,12 +32,15 @@ export const fetchRetrosynthesis = (state, setState) => {
 };
 
 export const fetchPathWay = (state, setState) => {
+  setState({ ...state, pageStage: "Loading" });
+  const prev = state.pageStage;
   axios
     .post("http://127.0.0.1:5000/getPathWay", {
       log: state.logChem,
     })
     .then((response) => {
       console.log("velody");
+      setState({ ...state, pageState: prev });
     })
 
     .catch((error) => {
@@ -46,14 +49,14 @@ export const fetchPathWay = (state, setState) => {
 };
 
 export const processImage = (chems, state, setState) => {
-  setState({ ...state, pageState: "Loading" });
+  setState({ ...state, pageStage: "Loading" });
   axios
-    .post("http://127.0.0.1:5 000/processImage", {
+    .post("http://127.0.0.1:5000/processImage", {
       chems: chems,
     })
     .then((response) => {
       console.log("velody");
-      setState({ ...state, pageState: "Suggestion" });
+      // setState({ ...state, pageState: prev });
     })
     .catch((error) => {
       console.log(error);

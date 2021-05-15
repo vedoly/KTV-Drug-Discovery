@@ -10,7 +10,7 @@ import { ImgList } from "../component/ImgList";
 import { fetchPathWay, fetchRetrosynthesis } from "../api/api";
 import { CurrentList } from "../component/CurrentList";
 import { Row, Col, Button } from "antd";
-
+import { LogChem } from "../component/LogChem";
 function delay(URL) {
   setTimeout(function () {
     window.location = URL;
@@ -45,7 +45,7 @@ export const RetroSynthesis = () => {
             <CurrentList {...{ state, setState }}></CurrentList>
           </div>
         </Row>
-
+        <LogChem {...{ state, setState }}></LogChem>
         <Row className="mt-3">
           <Col
             span={10}
