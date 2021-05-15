@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export const fetchRetrosynthesis = (state, setState) => {
-  setState({ ...state, resultChem: "Loading" });
+  setState({ ...state, resultChem: "Loading", pageStage: "Loading" });
   console.log(state.resultChem);
   axios
     .post("http://127.0.0.1:5000/retrosynthesis/predict", {

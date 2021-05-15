@@ -32,7 +32,10 @@ export const RetroSynthesis = () => {
     <div>
       <Title></Title>
       <div>{state.pageStage}</div>
-      <div className="container p-4 rounded" style={{backgroundColor: "#f8f9fa"}}>
+      <div
+        className="container p-4 rounded"
+        style={{ backgroundColor: "#f8f9fa" }}
+      >
         <Row className="">
           <div
             className="container p-3 rounded"
@@ -65,12 +68,12 @@ export const RetroSynthesis = () => {
           </Col>
         </Row>
 
-        <TextInput chem={state.chem}></TextInput>
+        <TextInput {...{ state, setState }}></TextInput>
 
         <div className="pt-4">
           <ImgList className="pr-1" {...{ state, setState }}></ImgList>
         </div>
-        </div>
+      </div>
     </div>
   );
 };

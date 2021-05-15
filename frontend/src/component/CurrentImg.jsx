@@ -6,14 +6,16 @@ import { Modal, Button } from "antd";
 
 export const CurrentImg = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const handleOk = () => {
-    setIsModalVisible(false);
-    fetchRetrosynthesis(state, setState);
-  };
 
   const state = props.state;
   const setState = props.setState;
   let x = 0;
+  const handleOk = () => {
+    setIsModalVisible(false);
+    setState({ ...state, pageStage: "Loading" });
+    fetchRetrosynthesis(state, setState);
+  };
+
   const newChem = props.chem
     .replace("/", "v")
     .replace("\\", "w")
