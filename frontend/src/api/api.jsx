@@ -31,6 +31,14 @@ export const fetchRetrosynthesis = (state, setState) => {
     });
 };
 
+export const generateMolecules = (modelId) => {
+  if (modelId == 0) {
+    return [0,1,2,3,4,5,6,7,8,9];
+  }
+  return [9,8,7,6,5,4,3,2,1,0];
+  
+};
+
 export const fetchPathWay = (state, setState) => {
   axios
     .post("http://127.0.0.1:5000/getPathWay", {
