@@ -34,7 +34,7 @@ export const Generative = () => {
       <h1>test</h1>
       <div className="container p-4 rounded" style={{backgroundColor: "#f8f9fa"}} >
         <h4 className="my-2">Choose Generative Model</h4>
-        <ModelsForm className="my-2" label="Generative Model" models={['Generative Model 1', ' Generative Model 2']} setGenChem={setGenChem}></ModelsForm>
+        <ModelsForm className="my-2" label="Generative Model" models={['CGVAE', ' Generative Model 2']} setGenChem={setGenChem}></ModelsForm>
         <GenerativeMols className="my-2" genChem={genChem}></GenerativeMols>
       </div>
     </div>

@@ -3,13 +3,13 @@ import { generateMolecules } from "../api/api";
 
 export const ModelsForm = (props) => {
 
-    const [modelId, setModelId] = useState(-1);
+    const [modelName, setModelName] = useState('');
     const [num, setNum] = useState(0);
     
     const onSubmit = async (event) => {
         event.preventDefault(); // Prevent default submission
         try {
-            props.setGenChem(generateMolecules(modelId,num));
+            props.setGenChem( await generateMolecules(modelName,num));
         } catch (e) {
           alert(`Registration failed! ${e.message}`);
         }
@@ -20,9 +20,9 @@ export const ModelsForm = (props) => {
             <form className="form-inline" onSubmit={onSubmit}>
                 <label className="fs-6 mr-2" for="inlineFormCustomSelectPref">{props.label}</label>
                 <select className="custom-select my-1 mr-3" id="inlineFormCustomSelectPref"
-                onChange = {(e) => setModelId(e.target.value)}>
-                    <option selected value={-1}>Choose...</option>
-                    {props.models.map((model,index) =>  <option value={index}>{model}</option>)}
+                onChange = {(e) => setModelName(e.target.value)}>
+                    <option selected value={""}>Choose...</option>
+                    {props.models.map((model) =>  <option value={model}>{model}</option>)}
                 </select>
                 <div className="form-group">
                     <label className="fs-6 mr-2" for="chemicalName">Numbers of Molecules</label>
@@ -30,7 +30,7 @@ export const ModelsForm = (props) => {
                     onChange = {(e) => setNum(e.target.value)}/>
                 </div>
             
-                <button type="submit" className="btn btn-primary my-1" disabled={modelId < 0 || num <= 0}>Generate</button>
+                <button type="submit" className="btn btn-primary my-1" disabled={!modelName || num <= 0}>Generate</button>
             </form>
         </div>
     )

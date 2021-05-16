@@ -31,11 +31,15 @@ export const fetchRetrosynthesis = (state, setState) => {
     });
 };
 
-export const generateMolecules = (modelId) => {
-  if (modelId == 0) {
-    return [0,1,2,3,4,5,6,7,8,9];
+export const generateMolecules = async (modelName, num) => {
+
+  try {
+    let res = await axios.post("http://127.0.0.1:5555/generative/generate", {model: modelName, num: num})
+    if (res.status==200) return res.data.result
+    else console.log(res)
+  } catch (e) {
+    console.log(e)
   }
-  return [9,8,7,6,5,4,3,2,1,0];
   
 };
 

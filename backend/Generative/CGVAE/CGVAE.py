@@ -927,8 +927,8 @@ class DenseGGNNChemModel(ChemModel):
         print(generated_all_similes[-1][1])
         if len(generated_all_similes) >= self.params['number_of_generation']:
             generated_all_similes.sort(key=lambda x: -x[1])
-            with open("pkl/generated_smiles_with_qed.pkl", "wb") as f:
-                pickle.dump(generated_all_similes,f)
+            # with open("./Generative/CGVAE/pkl/generated_smiles_with_qed.pkl", "wb") as f:
+            #     pickle.dump(generated_all_similes,f)
             print("generation done")
 
     def compensate_node_length(self, elements, bucket_size):
