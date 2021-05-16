@@ -31,6 +31,18 @@ export const fetchRetrosynthesis = (state, setState) => {
     });
 };
 
+export const generateMolecules = async (modelName, num) => {
+
+  try {
+    let res = await axios.post("http://127.0.0.1:5555/generative/generate", {model: modelName, num: num})
+    if (res.status==200) return res.data.result
+    else console.log(res)
+  } catch (e) {
+    console.log(e)
+  }
+  
+};
+
 export const fetchPathWay = (state, setState) => {
   axios
     .post("http://127.0.0.1:5000/getPathWay", {

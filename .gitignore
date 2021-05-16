@@ -5,11 +5,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-
+.DS_Store
 backend/build/
 frontend/dist/
 backend/Model
-backend/tmp
+backend/tmp/*
 frontend/node_modules
 
 # Diagnostic reports (https://nodejs.org/api/report.html)

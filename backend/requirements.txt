@@ -1,0 +1,9 @@
+docopt==0.6.2
+typing
+planarity
+pickle5
+seaborn
+flask==1.1.2
+flask-bootstrap
+flask_cors
+opencv-python
