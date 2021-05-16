@@ -36,10 +36,15 @@ def testPost():
 @cross_origin()
 def retrosynthesisPredict():
     
+  
+ 
 
 
-    # print(request.get_json(),"gggggggg")
-    # return request.get_json()
+    test = os.listdir('tmp')
+
+    for images in test:
+        if images.endswith(".png"):
+            os.remove(os.path.join('tmp', images))
     try:
         smi = request.json['smi']
         print(smi)
