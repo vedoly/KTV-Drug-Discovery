@@ -30,7 +30,7 @@ export const LogChem = (props) => {
         okText="OK"
         cancelText="Cancel"
       >
-        {state.pageStage != "Loading" ? (
+        {state.logState != "Loading" ? (
           <img
             src={`http://localhost:5000/get-image/velody.png`}
             width={"100%"}

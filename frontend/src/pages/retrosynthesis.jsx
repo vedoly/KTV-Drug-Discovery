@@ -25,48 +25,26 @@ export const RetroSynthesis = () => {
     currentChem: [search],
     resultChem: "Loading",
     logChem: [],
-    pageStage: "Init",
+    pageState: "Choosing",
+    logState: "Ready",
   });
 
   return (
     <div>
       <Title></Title>
-      <div>{state.pageStage}</div>
+      <div>
+        {state.pageState}
+        {state.logState}
+      </div>
       <div
         className="container p-4 rounded"
         style={{ backgroundColor: "#f8f9fa" }}
       >
-        <Row className="">
-          <div
-            className="container p-3 rounded"
-            style={{ background: "white" }}
-          >
-            <h4>Something</h4>
-            <CurrentList {...{ state, setState }}></CurrentList>
-          </div>
-        </Row>
+        <div className="container p-3 rounded" style={{ background: "white" }}>
+          <CurrentList {...{ state, setState }}></CurrentList>
+        </div>
+
         <LogChem {...{ state, setState }}></LogChem>
-        <Row className="mt-3">
-          <Col
-            span={10}
-            className="shadow-lg rounded"
-            style={{ background: "#DCDBFF", padding: "8px 0" }}
-          >
-            <h5 className="pt-3 pl-3">Chem : {state.chem}</h5>
-          </Col>
-          <Col span={6} className="pt-3" offset={6}>
-            {" "}
-            <Button
-              type="primary"
-              className="pt-1"
-              onClick={(e) => {
-                fetchRetrosynthesis(state, setState);
-              }}
-            >
-              Predict
-            </Button>
-          </Col>
-        </Row>
 
         <TextInput {...{ state, setState }}></TextInput>
 

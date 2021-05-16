@@ -12,7 +12,7 @@ export const CurrentImg = (props) => {
   let x = 0;
   const handleOk = () => {
     setIsModalVisible(false);
-    setState({ ...state, pageStage: "Loading" });
+    setState({ ...state, pageState: "Loading" });
     fetchRetrosynthesis(state, setState);
   };
 

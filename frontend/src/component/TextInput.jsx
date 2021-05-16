@@ -18,7 +18,7 @@ export const TextInput = (props) => {
             type="submit"
             className="btn btn-primary"
             onClick={(e) => {
-              props.setState({ ...props.state, pageStage: "Loading" });
+              props.setState({ ...props.state, pageState: "Loading" });
               console.log(e);
             }}
           >
