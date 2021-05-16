@@ -27,6 +27,7 @@ export const RetroSynthesis = () => {
     logChem: [],
     pageState: "Choosing",
     logState: "Ready",
+    onChem: [],
   });
 
   return (
@@ -35,6 +36,7 @@ export const RetroSynthesis = () => {
       <div>
         {state.pageState}
         {state.logState}
+        {state.onChem}
       </div>
       <div
         className="container p-4 rounded"

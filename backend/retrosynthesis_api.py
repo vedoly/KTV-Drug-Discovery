@@ -42,9 +42,9 @@ def retrosynthesisPredict():
 
     test = os.listdir('tmp')
 
-    for images in test:
-        if images.endswith(".png"):
-            os.remove(os.path.join('tmp', images))
+    # for images in test:
+    #     if images.endswith(".png"):
+    #         os.remove(os.path.join('tmp', images))
     try:
         smi = request.json['smi']
         print(smi)
@@ -64,9 +64,17 @@ def retrosynthesisPredict():
 
         # for c in os.listdir('tmp'):
         #     send_file('tmp/'+c)
-        return {'result':f}
+        test = os.listdir('tmp')
+        on_chem = [int(e[3:-17]) for e in test if 'reaction_tmp' in e]
+        return {'result':f,'on_chem':on_chem}
     except:
-        return {'reuslt':[]}
+        f = open('tmp/tgt10.txt','r')
+        f = [e.strip().replace(" ","") for e in f.readlines()]
+        test = os.listdir('tmp')
+        on_chem = [int(e[3:-17]) for e in test if 'reaction_tmp' in e]
+        
+        return {'result':f,'on_chem':on_chem}
+        # return {'reuslt':[]}
 
 
 @app.route("/get-image/<image_name>")

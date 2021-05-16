@@ -21,6 +21,7 @@ export const fetchRetrosynthesis = (state, setState) => {
         currentChem: currentChemx,
         resultChem: response.data.result,
         pageState: "Suggestion",
+        onChem: response.data.on_chem,
       });
 
       console.log(state.resultChem);
@@ -32,15 +33,16 @@ export const fetchRetrosynthesis = (state, setState) => {
 };
 
 export const generateMolecules = async (modelId, num) => {
-
   try {
-    let res = await axios.post("http://127.0.0.1:5555/generative/generate", {modelId: modelId, num: num})
-    if (res.status==200) return res.data.result
-    else console.log(res)
+    let res = await axios.post("http://127.0.0.1:5555/generative/generate", {
+      modelId: modelId,
+      num: num,
+    });
+    if (res.status == 200) return res.data.result;
+    else console.log(res);
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-  
 };
 
 export const fetchPathWay = (state, setState) => {

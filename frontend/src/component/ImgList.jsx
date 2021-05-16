@@ -3,11 +3,11 @@ import axios from "axios";
 import { Img } from "./Img";
 import { RetroSynthesis } from "../pages/retrosynthesis";
 import { Spin, Alert } from "antd";
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export const ImgList = (props) => {
   const resultChem = props.state.resultChem;
-
+  const numbers = props.state.onChem.map((x) => +x);
+  numbers.sort((a, b) => a - b);
   if (props.state.pageState !== "Loading") {
     return props.state.pageState === "Suggestion" ? (
       numbers.map((number) => (
