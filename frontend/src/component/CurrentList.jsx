@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col } from "antd";
 
 export const CurrentList = ({ state, setState }) => {
-  return state.pageStage !== "Init" ? (
+  return state.chem != "empty " ? (
     <div>
       <h4 className="pl-4">Chem</h4>
 

@@ -10,7 +10,7 @@ import { ImgList } from "../component/ImgList";
 import { fetchPathWay, fetchRetrosynthesis } from "../api/api";
 import { CurrentList } from "../component/CurrentList";
 import { Row, Col, Button } from "antd";
-
+import { LogChem } from "../component/LogChem";
 function delay(URL) {
   setTimeout(function () {
     window.location = URL;
@@ -25,52 +25,33 @@ export const RetroSynthesis = () => {
     currentChem: [search],
     resultChem: "Loading",
     logChem: [],
-    pageStage: "Init",
+    pageState: "Choosing",
+    logState: "Ready",
   });
 
   return (
     <div>
       <Title></Title>
-      <div>{state.pageStage}</div>
-      <div className="container p-4 rounded" style={{backgroundColor: "#f8f9fa"}}>
-        <Row className="">
-          <div
-            className="container p-3 rounded"
-            style={{ background: "white" }}
-          >
-            <h4>Something</h4>
-            <CurrentList {...{ state, setState }}></CurrentList>
-          </div>
-        </Row>
+      <div>
+        {state.pageState}
+        {state.logState}
+      </div>
+      <div
+        className="container p-4 rounded"
+        style={{ backgroundColor: "#f8f9fa" }}
+      >
+        <div className="container p-3 rounded" style={{ background: "white" }}>
+          <CurrentList {...{ state, setState }}></CurrentList>
+        </div>
 
-        <Row className="mt-3">
-          <Col
-            span={10}
-            className="shadow-lg rounded"
-            style={{ background: "#DCDBFF", padding: "8px 0" }}
-          >
-            <h5 className="pt-3 pl-3">Chem : {state.chem}</h5>
-          </Col>
-          <Col span={6} className="pt-3" offset={6}>
-            {" "}
-            <Button
-              type="primary"
-              className="pt-1"
-              onClick={(e) => {
-                fetchRetrosynthesis(state, setState);
-              }}
-            >
-              Predict
-            </Button>
-          </Col>
-        </Row>
+        <LogChem {...{ state, setState }}></LogChem>
 
-        <TextInput chem={state.chem}></TextInput>
+        <TextInput {...{ state, setState }}></TextInput>
 
         <div className="pt-4">
           <ImgList className="pr-1" {...{ state, setState }}></ImgList>
         </div>
-        </div>
+      </div>
     </div>
   );
 };

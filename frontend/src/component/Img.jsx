@@ -29,7 +29,7 @@ export const Img = (props) => {
       logChem: newLogChem,
       chem: result,
       currentChem: newCurrentChem,
-      pageStage: "Choosing",
+      pageState: "Choosing",
     });
   };
 
@@ -49,7 +49,7 @@ export const Img = (props) => {
       logChem: newLogChem,
       chem: result,
       currentChem: newCurrentChem,
-      pageStage: "Choosing",
+      pageState: "Choosing",
     });
   };
 
