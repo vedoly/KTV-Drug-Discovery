@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export const fetchRetrosynthesis = (state, setState) => {
-  setState({ ...state, resultChem: "Loading" });
+  setState({ ...state, resultChem: "Loading", pageState: "Loading" });
   console.log(state.resultChem);
   axios
     .post("http://127.0.0.1:5000/retrosynthesis/predict", {
@@ -20,7 +20,7 @@ export const fetchRetrosynthesis = (state, setState) => {
         ...state,
         currentChem: currentChemx,
         resultChem: response.data.result,
-        pageStage: "Suggestion",
+        pageState: "Suggestion",
       });
 
       console.log(state.resultChem);
@@ -44,15 +44,19 @@ export const generateMolecules = async (modelId, num) => {
 };
 
 export const fetchPathWay = (state, setState) => {
+  setState({ ...state, logState: "Loading" });
+
   axios
     .post("http://127.0.0.1:5000/getPathWay", {
       log: state.logChem,
     })
     .then((response) => {
       console.log("velody");
+      setState({ ...state, logState: "Ready" });
     })
 
     .catch((error) => {
+      setState({ ...state, logState: "Ready" });
       console.log(error);
     });
 };
@@ -60,12 +64,12 @@ export const fetchPathWay = (state, setState) => {
 export const processImage = (chems, state, setState) => {
   setState({ ...state, pageState: "Loading" });
   axios
-    .post("http://127.0.0.1:5 000/processImage", {
+    .post("http://127.0.0.1:5000/processImage", {
       chems: chems,
     })
     .then((response) => {
       console.log("velody");
-      setState({ ...state, pageState: "Suggestion" });
+      // setState({ ...state, pageState: prev });
     })
     .catch((error) => {
       console.log(error);

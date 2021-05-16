@@ -8,8 +8,8 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 export const ImgList = (props) => {
   const resultChem = props.state.resultChem;
 
-  if (resultChem !== "Loading") {
-    return props.state.pageStage === "Suggestion" ? (
+  if (props.state.pageState !== "Loading") {
+    return props.state.pageState === "Suggestion" ? (
       numbers.map((number) => (
         <ui>
           {/* {`RX_${number}:    \n`} */}
@@ -26,14 +26,12 @@ export const ImgList = (props) => {
       <div>Select Smi</div>
     );
   } else {
-    return props.state.pageStage !== "Init" ? (
+    return (
       <div>
         <Spin tip="Loading..." size="large">
           <Alert message="" description="" type="" />
         </Spin>
       </div>
-    ) : (
-      <h1>Pls fill smi in the box</h1>
     );
   }
 };
