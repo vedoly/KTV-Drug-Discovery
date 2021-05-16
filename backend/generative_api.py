@@ -24,16 +24,17 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/generative/generate',methods=['POST'])
 def generate():
-    model = request.json['model']
+    model_path = {0:"CGVAE",1:"CGVAE"}
+    model_id = int(request.json['modelId'])
     num = int(request.json['num'])
     generated_smiles_with_qed = []
-    if model=='CGVAE':        
+    if model_id==0:        
         # choice 1 : pickle
-        with open(f'./Generative/{model}/pkl/generated_smiles_with_qed.pkl copy', "rb") as generated_smiles_with_qed_file:
+        with open(f'./Generative/{model_path[model_id]}/pkl/gen_seed0_1000_no_sort.pkl', "rb") as generated_smiles_with_qed_file: #gen again tonight seed 0 pls no sort
             generated_smiles_with_qed = pickle.load(generated_smiles_with_qed_file)[:num]
         # choice 2 : actual run
-        if num > 500:
-            args = {'--config': '{"generation": true, "number_of_generation": '+str(num-500)+', "random_seed":1}',
+        if num > 1000:
+            args = {'--config': '{"generation": true, "number_of_generation": '+str(num-1000)+', "random_seed":1}',
                     '--config-file': None,
                     '--data_dir': 'Generative/CGVAE',
                     '--dataset': 'zinc',
@@ -43,14 +44,28 @@ def generate():
                     '--restore': 'Generative/CGVAE/pkl/3_zinc.pickle'}
                 
             generated_smiles_with_qed += generate_from_model(args)
-            generated_smiles_with_qed.sort(key=lambda x: -x[1])
-    
-    # ret = []
+
+    elif model_id==1:        
+        # choice 1 : pickle
+        with open(f'./Generative/{model_path[model_id]}/pkl/gen_seed15_1000_no_sort.pkl', "rb") as generated_smiles_with_qed_file: #gen new seed tonight (seed15) no sort
+            generated_smiles_with_qed = pickle.load(generated_smiles_with_qed_file)[:num]
+        # choice 2 : actual run
+        if num > 1000:
+            args = {'--config': '{"generation": true, "number_of_generation": '+str(num-1000)+', "random_seed":16}',
+                    '--config-file': None,
+                    '--data_dir': 'Generative/CGVAE',
+                    '--dataset': 'zinc',
+                    '--freeze-graph-model': False,
+                    '--help': False,
+                    '--log_dir': None,
+                    '--restore': 'Generative/CGVAE/pkl/3_zinc.pickle'}
+                
+            generated_smiles_with_qed += generate_from_model(args)
+    generated_smiles_with_qed.sort(key=lambda x: -x[1])
 
     for (smiles,qed) in generated_smiles_with_qed:
         m = Chem.MolFromSmiles(smiles)
         Draw.MolToFile(m, "./tmp/gen_"+smiles.replace("#","$")+".png")
-        # ret.append({'smiles':smiles, 'qed':qed})
 
     return {'result' : generated_smiles_with_qed}
 
@@ -58,8 +73,6 @@ def generate():
 def get_image(image_name):
     
     app.config["CLIENT_IMAGES"] = 'tmp/'
-
-    # image_name = image_name.replace("$","#")
     
     try:
         return send_from_directory(app.config["CLIENT_IMAGES"], filename=image_name)

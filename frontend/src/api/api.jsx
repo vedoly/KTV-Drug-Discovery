@@ -31,10 +31,10 @@ export const fetchRetrosynthesis = (state, setState) => {
     });
 };
 
-export const generateMolecules = async (modelName, num) => {
+export const generateMolecules = async (modelId, num) => {
 
   try {
-    let res = await axios.post("http://127.0.0.1:5555/generative/generate", {model: modelName, num: num})
+    let res = await axios.post("http://127.0.0.1:5555/generative/generate", {modelId: modelId, num: num})
     if (res.status==200) return res.data.result
     else console.log(res)
   } catch (e) {
