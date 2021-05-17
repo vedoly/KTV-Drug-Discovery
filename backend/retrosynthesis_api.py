@@ -7,6 +7,7 @@ from flask_cors import CORS, cross_origin
 import shutil
 import cv2 as cv
 import pubchempy as pcp
+import time
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -127,8 +128,7 @@ def getPathWay():
 @app.route("/getSimilar",methods=['POST'])
 @cross_origin()
 def getSimilar():
-   
- 
+
     try:
         chem = request.json['smi']
         print(chem)
