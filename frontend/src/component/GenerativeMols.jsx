@@ -3,11 +3,10 @@ import React, { useDebugValue, useState } from "react";
 import { processImage, getSimilar } from "../api/api";
 
 export const GenerativeMols = (props) => {
-  let itemPerPage = 30;
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
   let total = props.genChem.length;
-  let totalPage = Math.ceil(total / itemPerPage);
-  console.log(totalPage);
+  let totalPage = Math.ceil(total / pageSize);
   const [chem, setChem] = useState("");
   const [state, setState] = useState({
     similar: [],
@@ -16,7 +15,7 @@ export const GenerativeMols = (props) => {
 
   const changePageSettings = (page, pageSize) => {
     setPage(page);
-    itemPerPage = pageSize;
+    setPageSize(pageSize)
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -31,7 +30,7 @@ export const GenerativeMols = (props) => {
           }
           total={total}
           onChange={changePageSettings}
-          defaultPageSize={itemPerPage}
+          defaultPageSize={pageSize}
           defaultCurrent={1}
         ></Pagination>
       )}
@@ -42,7 +41,7 @@ export const GenerativeMols = (props) => {
         }
       >
         {props.genChem
-          .slice((page - 1) * itemPerPage, page * itemPerPage)
+          .slice((page - 1) * pageSize, page * pageSize)
           .map((item) => (
             <figure className="m-3">
               <img
@@ -82,30 +81,32 @@ export const GenerativeMols = (props) => {
         okText="Predict"
         cancelText="Cancel"
       >
-        <img
-          src={
-            `http://localhost:5555/get-image/gen_` +
-            chem.replace("#", "$") +
-            `.png`
-          }
-          onClick={() => {
-            processImage([chem], state, setState);
-            const queryString = new URLSearchParams(chem).toString();
+        <div>
+          <img style={{display:'block', margin:'auto'}}
+            src={
+              `http://localhost:5555/get-image/gen_` +
+              chem.replace("#", "$") +
+              `.png`
+            }
+            onClick={() => {
+              processImage([chem], state, setState);
+              const queryString = new URLSearchParams(chem).toString();
 
-            window.open(
-              `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
-            );
-          }}
-        ></img>
+              window.open(
+                `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+              );
+            }}
+          ></img>
+        </div>
         {state.pageState === "Loading" ? (
           <Spin tip="Loading..." size="large">
             <Alert message="" description="" type="" />
           </Spin>
         ) : (
           // <h1>{state.similar}</h1>
-
+          <ul style={{justifyContent:"center", display:"flex", "padding":'0'}}> {
           state.similar.map((number) => (
-            <li>
+            <li style={{display:"inline-block"}}>
               {
                 <img
                   src={
@@ -126,6 +127,7 @@ export const GenerativeMols = (props) => {
               }
             </li>
           ))
+            }</ul>
         )}
       </Modal>
     </div>

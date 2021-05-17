@@ -9,8 +9,8 @@ export const ImgList = (props) => {
   const numbers = props.state.onChem.map((x) => +x);
   numbers.sort((a, b) => a - b);
   if (props.state.pageState !== "Loading") {
-    return props.state.pageState === "Suggestion" ? (
-      numbers.map((number) => (
+    // return props.state.pageState === "Suggestion" ? (
+    return numbers.map((number) => (
         <ui>
           {/* {`RX_${number}:    \n`} */}
 
@@ -21,10 +21,10 @@ export const ImgList = (props) => {
             setState={props.setState}
           ></Img>
         </ui>
-      ))
-    ) : (
-      <div>Select Smi</div>
-    );
+      ));
+    // ) : (
+    //   <div>Select Smi</div>
+    // );
   } else {
     return (
       <div>
