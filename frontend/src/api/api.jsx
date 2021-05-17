@@ -98,3 +98,29 @@ export const getGen = (state, setState) => {
       console.log(error);
     });
 };
+
+export const getSimilar = (chem, state, setState) => {
+  setState({ ...state, pageState: "Loading" });
+  axios
+    .post("http://127.0.0.1:5000/getSimilar", {
+      smi: chem,
+    })
+    .then((response) => {
+      console.log(response.data.similar);
+      processImage(response.data.similar, state, setState);
+      setState({
+        ...state,
+        similar: response.data.similar,
+        pageState: "Ready",
+      });
+    })
+
+    .catch((error) => {
+      console.log(error);
+      setState({
+        ...state,
+
+        genPageState: "Error",
+      });
+    });
+};

@@ -7,3 +7,4 @@ flask==1.1.2
 flask-bootstrap
 flask_cors
 opencv-python
+pubchempy 

@@ -62,6 +62,13 @@ export const CurrentImg = (props) => {
             height={"30%"}
             className="shadow rounded"
             style={{ background: "transparent" }}
+            onClick={() => {
+              const queryString = new URLSearchParams(props.chem).toString();
+
+              window.open(
+                `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+              );
+            }}
           ></img>
         </Modal>
       </div>

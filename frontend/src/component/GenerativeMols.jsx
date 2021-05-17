@@ -1,5 +1,6 @@
-import { Pagination, Modal } from "antd";
+import { Pagination, Modal, Spin, Alert } from "antd";
 import React, { useDebugValue, useState } from "react";
+import { processImage, getSimilar } from "../api/api";
 
 export const GenerativeMols = (props) => {
   let itemPerPage = 30;
@@ -8,6 +9,10 @@ export const GenerativeMols = (props) => {
   let totalPage = Math.ceil(total / itemPerPage);
   console.log(totalPage);
   const [chem, setChem] = useState("");
+  const [state, setState] = useState({
+    similar: [],
+    pageState: "Ready",
+  });
 
   const changePageSettings = (page, pageSize) => {
     setPage(page);
@@ -18,6 +23,7 @@ export const GenerativeMols = (props) => {
 
   return (
     <div>
+      {state.chem}
       {total > 0 && (
         <Pagination
           showTotal={(total, range) =>
@@ -46,8 +52,10 @@ export const GenerativeMols = (props) => {
                   `.png`
                 }
                 onClick={() => {
+                  processImage([chem], state, setState);
                   setIsModalVisible(true);
                   setChem(item[0]);
+                  getSimilar(item[0], state, setState);
                 }}
               ></img>
               <figcaption className="my-2" style={{ textAlign: "center" }}>
@@ -56,6 +64,7 @@ export const GenerativeMols = (props) => {
             </figure>
           ))}
       </div>
+
       <Modal
         title={chem}
         visible={isModalVisible}
@@ -68,6 +77,7 @@ export const GenerativeMols = (props) => {
         }}
         onCancel={() => {
           setIsModalVisible(false);
+          setState({ ...state, pageState: "Ready" });
         }}
         okText="Predict"
         cancelText="Cancel"
@@ -78,7 +88,45 @@ export const GenerativeMols = (props) => {
             chem.replace("#", "$") +
             `.png`
           }
+          onClick={() => {
+            processImage([chem], state, setState);
+            const queryString = new URLSearchParams(chem).toString();
+
+            window.open(
+              `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+            );
+          }}
         ></img>
+        {state.pageState === "Loading" ? (
+          <Spin tip="Loading..." size="large">
+            <Alert message="" description="" type="" />
+          </Spin>
+        ) : (
+          // <h1>{state.similar}</h1>
+
+          state.similar.map((number) => (
+            <li>
+              {
+                <img
+                  src={
+                    `http://localhost:5555/get-image/` +
+                    number.replace("#", "$") +
+                    `.png`
+                  }
+                  width={100}
+                  height={100}
+                  onClick={() => {
+                    const queryString = new URLSearchParams(number).toString();
+
+                    window.open(
+                      `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+                    );
+                  }}
+                ></img>
+              }
+            </li>
+          ))
+        )}
       </Modal>
     </div>
   );

@@ -6,6 +6,7 @@ import Retrosynthesis.results_visualize as rv
 from flask_cors import CORS, cross_origin
 import shutil
 import cv2 as cv
+import pubchempy as pcp
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -123,6 +124,18 @@ def getPathWay():
     cv.imwrite('tmp/velody.png', img1)
     return {'log':log}
 
+@app.route("/getSimilar",methods=['POST'])
+@cross_origin()
+def getSimilar():
+   
+ 
+    try:
+        chem = request.json['smi']
+        print(chem)
+        similar_chems = [e.isomeric_smiles for e in pcp.get_compounds(chem, namespace='smiles', searchtype='similarity',listkey_count=3)]
+        return {'similar':similar_chems}
+    except:
+        return {'similar':[]}
 
 @app.after_request
 def add_header(response):

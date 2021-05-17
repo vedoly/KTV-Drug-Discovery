@@ -20,7 +20,7 @@ export const LogChem = (props) => {
 
   return (
     <div>
-      <h1 onClick={handleClick}>Log</h1>
+      <Button onClick={handleClick}>View PathWayyyyyyc</Button>
       <Modal
         visible={isModalVisible}
         onOk={handleOk}
