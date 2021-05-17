@@ -14,7 +14,7 @@ export const fetchRetrosynthesis = (state, setState) => {
       let currentChemx = state.currentChem.filter((value, index, array) => {
         return value != state.chem;
       });
-      console.log(currentChemx);
+      console.log(response.data.on_chem);
 
       setState({
         ...state,
@@ -107,12 +107,13 @@ export const getSimilar = (chem, state, setState) => {
     })
     .then((response) => {
       console.log(response.data.similar);
-      processImage(response.data.similar, state, setState);
-      setState({
-        ...state,
-        similar: response.data.similar,
-        pageState: "Ready",
-      });
+      processImage(response.data.similar, state, setState).then(() =>
+        setState({
+          ...state,
+          similar: response.data.similar,
+          pageState: "Ready",
+        })
+      );
     })
 
     .catch((error) => {

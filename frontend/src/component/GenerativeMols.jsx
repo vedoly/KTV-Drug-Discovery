@@ -15,7 +15,7 @@ export const GenerativeMols = (props) => {
 
   const changePageSettings = (page, pageSize) => {
     setPage(page);
-    setPageSize(pageSize)
+    setPageSize(pageSize);
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -71,6 +71,7 @@ export const GenerativeMols = (props) => {
           setIsModalVisible(false);
           const queryParams = { Chem: chem };
           const queryString = new URLSearchParams(queryParams).toString();
+          processImage([chem], state, setState);
 
           window.location.href = `/retrosynthesis?${queryString}`;
         }}
@@ -82,7 +83,8 @@ export const GenerativeMols = (props) => {
         cancelText="Cancel"
       >
         <div>
-          <img style={{display:'block', margin:'auto'}}
+          <img
+            style={{ display: "block", margin: "auto" }}
             src={
               `http://localhost:5555/get-image/gen_` +
               chem.replace("#", "$") +
@@ -104,30 +106,35 @@ export const GenerativeMols = (props) => {
           </Spin>
         ) : (
           // <h1>{state.similar}</h1>
-          <ul style={{justifyContent:"center", display:"flex", "padding":'0'}}> {
-          state.similar.map((number) => (
-            <li style={{display:"inline-block"}}>
-              {
-                <img
-                  src={
-                    `http://localhost:5555/get-image/` +
-                    number.replace("#", "$") +
-                    `.png`
-                  }
-                  width={100}
-                  height={100}
-                  onClick={() => {
-                    const queryString = new URLSearchParams(number).toString();
+          <ul
+            style={{ justifyContent: "center", display: "flex", padding: "0" }}
+          >
+            {" "}
+            {state.similar.map((number) => (
+              <li style={{ display: "inline-block" }}>
+                {
+                  <img
+                    src={
+                      `http://localhost:5555/get-image/` +
+                      number.replace("#", "$") +
+                      `.png`
+                    }
+                    width={100}
+                    height={100}
+                    onClick={() => {
+                      const queryString = new URLSearchParams(
+                        number
+                      ).toString();
 
-                    window.open(
-                      `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
-                    );
-                  }}
-                ></img>
-              }
-            </li>
-          ))
-            }</ul>
+                      window.open(
+                        `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+                      );
+                    }}
+                  ></img>
+                }
+              </li>
+            ))}
+          </ul>
         )}
       </Modal>
     </div>
