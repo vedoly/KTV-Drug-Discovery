@@ -83,6 +83,7 @@ export const GenerativeMols = (props) => {
         cancelText="Cancel"
       >
         <div>
+          <h5 className="text-center">Generated Compound</h5>
           <img
             style={{ display: "block", margin: "auto" }}
             src={
@@ -105,35 +106,41 @@ export const GenerativeMols = (props) => {
             <Alert message="" description="" type="" />
           </Spin>
         ) : (
-          // <h1>{state.similar}</h1>
-          <ul
-            style={{ justifyContent: "center", display: "flex", padding: "0" }}
-          >
-            {state.similar.map((number) => (
-              <li style={{ display: "inline-block" }}>
-                {
-                  <img
-                    src={
-                      `http://localhost:5555/get-image/` +
-                      number.replace("#", "$") +
-                      `.png`
-                    }
-                    width={100}
-                    height={100}
-                    onClick={() => {
-                      const queryString = new URLSearchParams(
-                        number
-                      ).toString();
+          <div className="centered">
+            <h5 className="text-center pt-5">Similar Compounds</h5>
+            <ul
+              style={{
+                justifyContent: "center",
+                display: "flex",
+                padding: "0",
+              }}
+            >
+              {state.similar.map((number) => (
+                <li style={{ display: "inline-block" }}>
+                  {
+                    <img
+                      src={
+                        `http://localhost:5000/get-image/` +
+                        number.replace("#", "$") +
+                        `.png`
+                      }
+                      width={100}
+                      height={100}
+                      onClick={() => {
+                        const queryString = new URLSearchParams(
+                          number
+                        ).toString();
 
-                      window.open(
-                        `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
-                      );
-                    }}
-                  ></img>
-                }
-              </li>
-            ))}
-          </ul>
+                        window.open(
+                          `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+                        );
+                      }}
+                    ></img>
+                  }
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </Modal>
     </div>
