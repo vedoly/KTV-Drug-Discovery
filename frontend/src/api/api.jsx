@@ -99,21 +99,20 @@ export const getGen = (state, setState) => {
     });
 };
 
-export const getSimilar = (chem, state, setState) => {
+export const getSimilar = async (chem, state, setState) => {
   setState({ ...state, pageState: "Loading" });
   axios
     .post("http://127.0.0.1:5000/getSimilar", {
       smi: chem,
     })
-    .then((response) => {
+    .then(async (response) => {
       console.log(response.data.similar);
-      processImage(response.data.similar, state, setState).then(() =>
-        setState({
-          ...state,
-          similar: response.data.similar,
-          pageState: "Ready",
-        })
-      );
+      await processImage(response.data.similar, state, setState);
+      setState({
+        ...state,
+        similar: response.data.similar,
+        pageState: "Ready",
+      });
     })
 
     .catch((error) => {

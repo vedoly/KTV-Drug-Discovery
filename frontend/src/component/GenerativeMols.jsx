@@ -109,7 +109,6 @@ export const GenerativeMols = (props) => {
           <ul
             style={{ justifyContent: "center", display: "flex", padding: "0" }}
           >
-            {" "}
             {state.similar.map((number) => (
               <li style={{ display: "inline-block" }}>
                 {
