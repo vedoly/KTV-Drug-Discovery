@@ -43,9 +43,9 @@ def retrosynthesisPredict():
 
     test = os.listdir('tmp')
 
-    # for images in test:
-    #     if images.endswith(".png"):
-    #         os.remove(os.path.join('tmp', images))
+    for images in test:
+        if images.endswith(".png") and "reaction" in images:
+            os.remove(os.path.join('tmp', images))
     try:
         smi = request.json['smi']
         print(smi)
