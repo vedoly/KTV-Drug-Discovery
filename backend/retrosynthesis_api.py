@@ -85,11 +85,11 @@ def get_image(image_name):
     app.config["CLIENT_IMAGES"] = 'tmp/'
 
     image_name = image_name.replace("$","#")
-    
+    print("x")
     try:
         return send_from_directory(app.config["CLIENT_IMAGES"], filename=image_name)
     except FileNotFoundError:
-        return send_from_directory(app.config["CLIENT_IMAGES"], filename='CC(=O)C1CC2CCCC2C(C(=O)NC2=CC(c3ccc(N)cn3)CC(C)C2)C1C.png')
+        return 
 
 @app.route('/processImage',methods=['POST'])
 def processImage():

@@ -47,7 +47,10 @@ export const GenerativeMols = (props) => {
               <img
                 src={
                   `http://localhost:5555/get-image/gen_` +
-                  item[0].replace("#", "$") +
+                  item[0]
+                    .replace("#", "$")
+                    .replaceAll("/", "v")
+                    .replaceAll("\\", "w") +
                   `.png`
                 }
                 onClick={() => {
@@ -92,7 +95,6 @@ export const GenerativeMols = (props) => {
               `.png`
             }
             onClick={() => {
-              processImage([chem], state, setState);
               const queryString = new URLSearchParams(chem).toString();
 
               window.open(
@@ -123,7 +125,10 @@ export const GenerativeMols = (props) => {
                       <img
                         src={
                           `http://localhost:5000/get-image/` +
-                          number.replace("#", "$") +
+                          number
+                            .replaceAll("#", "$")
+                            .replaceAll("/", "v")
+                            .replaceAll("\\", "w") +
                           `.png`
                         }
                         width={100}
