@@ -56,20 +56,21 @@ export const CurrentImg = (props) => {
           okText="Predict"
           cancelText="Cancel"
         >
-          <img
-            src={`http://localhost:5000/get-image/${newChem}.png`}
-            width={"30%"}
-            height={"30%"}
-            className="shadow rounded"
-            style={{ background: "transparent" }}
-            onClick={() => {
-              const queryString = new URLSearchParams(props.chem).toString();
+          <div>
+            <h5 className="text-center">Selected Compound</h5>
+            <img
+              src={`http://localhost:5000/get-image/${newChem}.png`}
+              className="shadow rounded"
+              style={{ display: "block", margin: "auto" }}
+              onClick={() => {
+                const queryString = new URLSearchParams(props.chem).toString();
 
-              window.open(
-                `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
-              );
-            }}
-          ></img>
+                window.open(
+                  `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+                );
+              }}
+            ></img>
+          </div>
         </Modal>
       </div>
     </div>
