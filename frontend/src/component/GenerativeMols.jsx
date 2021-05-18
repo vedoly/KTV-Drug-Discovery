@@ -115,30 +115,35 @@ export const GenerativeMols = (props) => {
                 padding: "0",
               }}
             >
-              {state.similar.map((number) => (
-                <li style={{ display: "inline-block" }}>
-                  {
-                    <img
-                      src={
-                        `http://localhost:5000/get-image/` +
-                        number.replace("#", "$") +
-                        `.png`
-                      }
-                      width={100}
-                      height={100}
-                      onClick={() => {
-                        const queryString = new URLSearchParams(
-                          number
-                        ).toString();
+              {}
+              {state.similar.length !== 0 ? (
+                state.similar.map((number) => (
+                  <li style={{ display: "inline-block" }}>
+                    {
+                      <img
+                        src={
+                          `http://localhost:5000/get-image/` +
+                          number.replace("#", "$") +
+                          `.png`
+                        }
+                        width={100}
+                        height={100}
+                        onClick={() => {
+                          const queryString = new URLSearchParams(
+                            number
+                          ).toString();
 
-                        window.open(
-                          `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
-                        );
-                      }}
-                    ></img>
-                  }
-                </li>
-              ))}
+                          window.open(
+                            `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+                          );
+                        }}
+                      ></img>
+                    }
+                  </li>
+                ))
+              ) : (
+                <p className="pt-2">There are no similar compound</p>
+              )}
             </ul>
           </div>
         )}
