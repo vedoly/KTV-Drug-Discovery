@@ -20,7 +20,8 @@ export const LogChem = (props) => {
 
   return (
     <div>
-      <Button onClick={handleClick}>View PathWayyyyyyc</Button>
+      <button className="btn btn-primary" onClick={handleClick}>View Pathway</button>
+      {/* <Button onClick={handleClick}>View PathWayyyyyyc</Button> */}
       <Modal
         visible={isModalVisible}
         onOk={handleOk}

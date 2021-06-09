@@ -23,7 +23,7 @@ export const ImgList = (props) => {
         </ui>
       ))
     ) : (
-      <div>Select Smi</div>
+      <div></div>
     );
   } else {
     return (

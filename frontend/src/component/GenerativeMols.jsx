@@ -3,11 +3,10 @@ import React, { useDebugValue, useState } from "react";
 import { processImage, getSimilar } from "../api/api";
 
 export const GenerativeMols = (props) => {
-  let itemPerPage = 30;
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
   let total = props.genChem.length;
-  let totalPage = Math.ceil(total / itemPerPage);
-  console.log(totalPage);
+  let totalPage = Math.ceil(total / pageSize);
   const [chem, setChem] = useState("");
   const [state, setState] = useState({
     similar: [],
@@ -16,7 +15,7 @@ export const GenerativeMols = (props) => {
 
   const changePageSettings = (page, pageSize) => {
     setPage(page);
-    itemPerPage = pageSize;
+    setPageSize(pageSize);
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -31,7 +30,7 @@ export const GenerativeMols = (props) => {
           }
           total={total}
           onChange={changePageSettings}
-          defaultPageSize={itemPerPage}
+          defaultPageSize={pageSize}
           defaultCurrent={1}
         ></Pagination>
       )}
@@ -42,13 +41,16 @@ export const GenerativeMols = (props) => {
         }
       >
         {props.genChem
-          .slice((page - 1) * itemPerPage, page * itemPerPage)
+          .slice((page - 1) * pageSize, page * pageSize)
           .map((item) => (
             <figure className="m-3">
               <img
                 src={
                   `http://localhost:5555/get-image/gen_` +
-                  item[0].replace("#", "$") +
+                  item[0]
+                    .replace("#", "$")
+                    .replaceAll("/", "v")
+                    .replaceAll("\\", "w") +
                   `.png`
                 }
                 onClick={() => {
@@ -72,6 +74,7 @@ export const GenerativeMols = (props) => {
           setIsModalVisible(false);
           const queryParams = { Chem: chem };
           const queryString = new URLSearchParams(queryParams).toString();
+          processImage([chem], state, setState);
 
           window.location.href = `/retrosynthesis?${queryString}`;
         }}
@@ -82,50 +85,72 @@ export const GenerativeMols = (props) => {
         okText="Predict"
         cancelText="Cancel"
       >
-        <img
-          src={
-            `http://localhost:5555/get-image/gen_` +
-            chem.replace("#", "$") +
-            `.png`
-          }
-          onClick={() => {
-            processImage([chem], state, setState);
-            const queryString = new URLSearchParams(chem).toString();
+        <div>
+          <h5 className="text-center">Generated Compound</h5>
+          <img
+            style={{ display: "block", margin: "auto" }}
+            src={
+              `http://localhost:5555/get-image/gen_` +
+              chem.replace("#", "$") +
+              `.png`
+            }
+            onClick={() => {
+              const queryString = new URLSearchParams(chem).toString();
 
-            window.open(
-              `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
-            );
-          }}
-        ></img>
+              window.open(
+                `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+              );
+            }}
+          ></img>
+        </div>
         {state.pageState === "Loading" ? (
           <Spin tip="Loading..." size="large">
             <Alert message="" description="" type="" />
           </Spin>
         ) : (
-          // <h1>{state.similar}</h1>
+          <div className="centered">
+            <h5 className="text-center pt-5">Similar Compounds</h5>
+            <ul
+              style={{
+                justifyContent: "center",
+                display: "flex",
+                padding: "0",
+              }}
+            >
+              {}
+              {state.similar.length !== 0 ? (
+                state.similar.map((number) => (
+                  <li style={{ display: "inline-block" }}>
+                    {
+                      <img
+                        src={
+                          `http://localhost:5000/get-image/` +
+                          number
+                            .replaceAll("#", "$")
+                            .replaceAll("/", "v")
+                            .replaceAll("\\", "w") +
+                          `.png`
+                        }
+                        width={100}
+                        height={100}
+                        onClick={() => {
+                          const queryString = new URLSearchParams(
+                            number
+                          ).toString();
 
-          state.similar.map((number) => (
-            <li>
-              {
-                <img
-                  src={
-                    `http://localhost:5555/get-image/` +
-                    number.replace("#", "$") +
-                    `.png`
-                  }
-                  width={100}
-                  height={100}
-                  onClick={() => {
-                    const queryString = new URLSearchParams(number).toString();
-
-                    window.open(
-                      `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
-                    );
-                  }}
-                ></img>
-              }
-            </li>
-          ))
+                          window.open(
+                            `https://pubchem.ncbi.nlm.nih.gov/#query=${queryString}`
+                          );
+                        }}
+                      ></img>
+                    }
+                  </li>
+                ))
+              ) : (
+                <p className="pt-2">There are no similar compound</p>
+              )}
+            </ul>
+          </div>
         )}
       </Modal>
     </div>

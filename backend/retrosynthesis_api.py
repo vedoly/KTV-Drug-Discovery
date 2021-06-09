@@ -7,6 +7,7 @@ from flask_cors import CORS, cross_origin
 import shutil
 import cv2 as cv
 import pubchempy as pcp
+import time
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -43,9 +44,9 @@ def retrosynthesisPredict():
 
     test = os.listdir('tmp')
 
-    # for images in test:
-    #     if images.endswith(".png"):
-    #         os.remove(os.path.join('tmp', images))
+    for images in test:
+        if images.endswith(".png") and "reaction" in images:
+            os.remove(os.path.join('tmp', images))
     try:
         smi = request.json['smi']
         print(smi)
@@ -84,11 +85,11 @@ def get_image(image_name):
     app.config["CLIENT_IMAGES"] = 'tmp/'
 
     image_name = image_name.replace("$","#")
-    
+    print("x")
     try:
         return send_from_directory(app.config["CLIENT_IMAGES"], filename=image_name)
     except FileNotFoundError:
-        abort(404)
+        return 
 
 @app.route('/processImage',methods=['POST'])
 def processImage():
@@ -127,8 +128,7 @@ def getPathWay():
 @app.route("/getSimilar",methods=['POST'])
 @cross_origin()
 def getSimilar():
-   
- 
+
     try:
         chem = request.json['smi']
         print(chem)

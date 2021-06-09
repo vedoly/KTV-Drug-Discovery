@@ -30,7 +30,7 @@ def generate():
     generated_smiles_with_qed = []
     if model_id==0:        
         # choice 1 : pickle
-        with open(f'./Generative/{model_path[model_id]}/pkl/gen_seed0_1000_no_sort.pkl', "rb") as generated_smiles_with_qed_file: #gen again tonight seed 0 pls no sort
+        with open(f'./Generative/{model_path[model_id]}/pkl/generated_smiles_with_qed_500.pkl', "rb") as generated_smiles_with_qed_file: #gen again tonight seed 0 pls no sort
             generated_smiles_with_qed = pickle.load(generated_smiles_with_qed_file)[:num]
         # choice 2 : actual run
         if num > 1000:
@@ -47,7 +47,7 @@ def generate():
 
     elif model_id==1:        
         # choice 1 : pickle
-        with open(f'./Generative/{model_path[model_id]}/pkl/gen_seed15_1000_no_sort.pkl', "rb") as generated_smiles_with_qed_file: #gen new seed tonight (seed15) no sort
+        with open(f'./Generative/{model_path[model_id]}/pkl/generated_smiles_with_qed_500.pkl', "rb") as generated_smiles_with_qed_file: #gen new seed tonight (seed15) no sort
             generated_smiles_with_qed = pickle.load(generated_smiles_with_qed_file)[:num]
         # choice 2 : actual run
         if num > 1000:
@@ -66,6 +66,7 @@ def generate():
     for (smiles,qed) in generated_smiles_with_qed:
         m = Chem.MolFromSmiles(smiles)
         Draw.MolToFile(m, "./tmp/gen_"+smiles.replace("#","$")+".png")
+        Draw.MolToFile(m, "./tmp/"+smiles.replace("#","$")+".png")
 
     return {'result' : generated_smiles_with_qed}
 

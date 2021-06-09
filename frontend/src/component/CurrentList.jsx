@@ -5,7 +5,7 @@ import { Row, Col } from "antd";
 export const CurrentList = ({ state, setState }) => {
   return state.chem != "empty " ? (
     <div>
-      <h4 className="pl-4">Chem</h4>
+      <h4 className="pl-4">Molecules</h4>
 
       <Row className="pl-3">
         {state.currentChem.map((chem) => (

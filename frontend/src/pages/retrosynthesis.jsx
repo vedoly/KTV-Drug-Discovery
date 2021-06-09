@@ -33,22 +33,24 @@ export const RetroSynthesis = () => {
   return (
     <div>
       <Title></Title>
-      <div>
+      {/* <div>
         {state.pageState}
         {state.logState}
         {state.onChem}
-      </div>
+      </div> */}
+      
       <div
         className="container p-4 rounded"
         style={{ backgroundColor: "#f8f9fa" }}
       >
+        {/* <div className="d-flex justify-content-end"><LogChem {...{ state, setState }}></LogChem></div> */}
+        
         <div className="container p-3 rounded" style={{ background: "white" }}>
+        <div style={{float:"right"}}><LogChem {...{ state, setState }}></LogChem></div>
           <CurrentList {...{ state, setState }}></CurrentList>
         </div>
 
-        <LogChem {...{ state, setState }}></LogChem>
-
-        <TextInput {...{ state, setState }}></TextInput>
+        {/* <TextInput {...{ state, setState }}></TextInput> */}
 
         <div className="pt-4">
           <ImgList className="pr-1" {...{ state, setState }}></ImgList>
